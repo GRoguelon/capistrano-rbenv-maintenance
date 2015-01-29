@@ -30,7 +30,7 @@ namespace :rbenv do
         execute :rbenv, 'install', args[:new_ruby] || fetch(:rbenv_ruby)
         execute :rbenv, 'local', args[:new_ruby] || fetch(:rbenv_ruby)
         execute :rbenv, 'rehash'
-        execute :gem, 'install', 'bundler' unless fetch(:bundle_roles)
+        execute :gem, 'install', 'bundler' if fetch(:bundle_roles)
         execute :rbenv, 'rehash'
       end
     end
@@ -39,7 +39,7 @@ namespace :rbenv do
   before 'rbenv:validate', 'rbenv:setup'
   before 'rbenv:install', 'rbenv:map_bins'
   before 'rbenv:validate', 'rbenv:install'
-  
+
   after 'rbenv:setup', 'rbenv:update'
 end
 
